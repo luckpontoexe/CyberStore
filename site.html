@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberStore</title>
+  <link rel="shortcut icon" type="imagex/png" href="./imagens/logocyber.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #fff;
+    }
+
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #ff004f;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #ff004f;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    .grid-ofertas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 20px;
+    }
+
+    .grid-card {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 250px;
+      box-shadow: 0 0 20px #ff004f55;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .grid-card:hover {
+      transform: scale(1.05);
+    }
+
+    .grid-card h3 {
+      color: #fff;
+      font-size: 1.4em;
+      margin: 20px 0;
+    }
+
+    .grid-card span {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .grid-card .btn {
+      background-color: #ff004f;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    .grid-card img {
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+      filter: brightness(0.9);
+    }
+
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: #222;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ff004f55;
+    }
+
+    .card h2 {
+      color: #ff004f;
+    }
+
+    .btn {
+      background-color: #ff004f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .reviews-section {
+      background-color: #0f0f0f;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .reviews-section h2 {
+      color: #fff;
+      font-size: 2em;
+      margin-bottom: 40px;
+    }
+
+    .reviews-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .review-card {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(255, 0, 79, 0.3);
+      text-align: left;
+    }
+
+    .review-card p {
+      margin: 0 0 10px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .review-author img {
+      width: 30px;
+      margin-right: 10px;
+    }
+
+    .stats {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      background-color: #ff004f;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    #chatPopup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1a1a1a;
+      width: 300px;
+      height: 400px;
+      border: 2px solid #ff004f;
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    #chatHeader {
+      background-color: #ff004f;
+      padding: 10px;
+      color: white;
+      text-align: center;
+    }
+
+    #chatBody {
+      padding: 10px;
+      height: 320px;
+      overflow-y: auto;
+      background-color: #121212;
+    }
+
+    #chatInput {
+      width: 100%;
+      border: none;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    footer {
+      background-color: #0b0b0b;
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    .payment-icons img {
+      width: 50px;
+      margin: 5px;
+      filter: brightness(0.8);
+    }
+
+    .footer-links {
+      margin-top: 15px;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; max-width: 1200px; margin: auto;">
+      <img src="./imagens/logocyber.png" width="80">
+    
+      <a href="#carrinho" style="margin-left: auto; text-decoration: none; color: white; position: relative;">
+        <img src="https://img.icons8.com/ios-filled/30/ffffff/shopping-cart.png" alt="Carrinho" style="vertical-align: middle;">
+      </a>
+    </div>
+    
+    <h1>CyberStore</h1>
+    <nav>
+      <a href="#vp">Valorant Points</a>
+      <a href="#assinaturas">Assinaturas</a>
+      <a href="#contas">Contas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="grid-ofertas">
+      <div class="grid-card">
+        <img src="https://i.imgur.com/XsEPZDW.png" alt="Assinaturas">
+        <h3>ASSINATURAS</h3> 
+        <a href="#assinaturas" class="btn">Ver agora</a>
+      </div>
+      <div class="grid-card">
+        <img src="https://i.imgur.com/LwrTkHT.png" alt="Contas">
+        <h3>CONTAS</h3>
+        <a href="#contas" class="btn">Ver agora</a>
+      </div> 
+      <div class="grid-card">
+        <img src="https://i.imgur.com/5A8jAdz.png" alt="Valorant Points">
+        <h3>VALORANT POINTS</h3>
+        <a href="#vp" class="btn">Ver agora</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="reviews-section">
+    <h2>O que dizem sobre a gente</h2>
+    <div class="reviews-container">
+      <div class="review-card">
+        <p>CyberStore é top demais, sempre ajudam no suporte. Recomendo 100%!</p>
+        <div class="review-author"><img src="imagens/usuario.png"><strong>Dedé</strong></div>
+      </div>
+      <div class="review-card">
+        <p>Melhor loja que já comprei! Atendimento impecável e produtos funcionam mesmo.</p>
+        <div class="review-author"><img src="imagens/usuario.png"><strong>Junior</strong></div>
+      </div>
+      <div class="review-card">
+        <p>Me responderam no chat em 2 minutos e resolveram tudo, incrível!</p>
+        <div class="review-author"><img src="imagens/usuario.png"><strong>Astolfo</strong></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat-box">+7.000 Clientes Satisfeitos</div>
+      <div class="stat-box">+120 Produtos no Catálogo</div>
+      <div class="stat-box">+4 Anos de Experiência</div>
+    </div>
+  </section>
+
+  <!-- Seção de Contas -->
+  <section class="section" id="contas">
+    <h2 style="color: #ff004f; margin-bottom: 30px;">Contas à Venda</h2>
+    <div class="grid-ofertas">
+      <div class="grid-card">
+        <img src="imagens/primebasico.jpg" alt="Prime Básico">
+        <h3>Prime Básico</h3>
+        <span>R$40,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+
+      <div class="grid-card">
+        <img src="imagens/image-lealdade.png" alt="Prime + Lealdade">
+        <h3>Prime + Lealdade</h3>
+        <span>R$60,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+
+      <div class="grid-card">
+        <img src="imagens/imageleal5y.png" alt="Prime + Lealdade + 5y">
+        <h3>Prime + Lealdade + 5y</h3>
+        <span>R$90,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+
+      <div class="grid-card">
+        <img src="imagens/image15y.png" alt="Prime + Lealdade + 5y + 10y">
+        <h3>Prime + Lealdade + 5y + 10y</h3>
+        <span>R$120,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Assinaturas -->
+  <section class="section" id="assinaturas">
+    <h2 style="color: #ff004f; margin-bottom: 30px;">Assinaturas CS2 (Cheats)</h2>
+    <div class="grid-ofertas">
+      <div class="grid-card">
+        <img src="imagens/image-memesense.png" alt="Memesense 14 dias">
+        <h3>MEMESENSE - 14 DIAS</h3>
+        <span>R$16,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+
+      <div class="grid-card">
+        <img src="imagens/image-memesense.png" alt="Memesense 31 dias">
+        <h3>MEMESENSE - 31 DIAS</h3>
+        <span>R$25,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+
+      <div class="grid-card">
+        <img src="imagens/image-memesense.png" alt="Memesense Lifetime">
+        <h3>MEMESENSE - LIFETIME</h3>
+        <span>R$239,00</span>
+        <a href="https://discord.gg/jb4xdM27" class="btn">Comprar agora</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contato">
+    <div class="card">
+      <h2>Atendimento</h2>
+      <p>Clique abaixo para falar com nosso bot.</p>
+      <button class="btn" onclick="toggleChat()">Abrir Chat</button>
+    </div>
+  </section>
+
+  <div id="chatPopup">
+    <div id="chatHeader">Cyberzinho</div>
+    <div id="chatBody"></div>
+    <input type="text" id="chatInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter') sendMessage()">
+  </div>
+
+  <footer>
+    <div>
+      <img src="imagens/logocyber.png" alt="CyberStore Logo" style="height: 40px;">
+    </div>
+    <div class="payment-icons">
+      <img src="https://img.icons8.com/color/48/stripe.png" alt="Stripe">
+      <img src="https://img.icons8.com/ios-filled/50/apple-pay.png" alt="Apple Pay">
+      <img src="https://img.icons8.com/color/48/google-pay-india.png" alt="Google Pay">
+      <img src="https://img.icons8.com/color/48/mastercard-logo.png" alt="Mastercard">
+      <img src="https://img.icons8.com/color/48/visa.png" alt="Visa">
+      <img src="https://img.icons8.com/color/48/pix.png" alt="Pix">
+    </div>
+    <div class="footer-links">
+      <a href="#">HOME</a>
+      <a href="#">LOJA</a>
+      <a href="#">REPUTAÇÃO</a>
+      <a href="#">CARRINHO</a>
+      <a href="#" onclick="abrirTermos()">TERMOS DE USO</a>
+      <a href="#">WHATSAPP</a>
+      <a href="#">DISCORD</a>
+    </div>
+    <p style="margin-top: 15px;">Copyright 2025 © CyberStore</p>
+  </footer>
+
+  <script>
+    window.onload = () => {
+      mostrarOpcoesIniciais();
+    };
+  
+    let estadoChat = '';
+    let produtoSelecionado = '';
+  
+    function toggleChat() {
+      const chat = document.getElementById('chatPopup');
+      chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+    }
+  
+    function mostrarOpcoesIniciais() {
+      const chatBody = document.getElementById('chatBody');
+      chatBody.innerHTML += `
+        <div style="margin-bottom: 10px; text-align: left;">
+          <div style="display: inline-block; background-color: #333; padding: 10px; border-radius: 10px; color: white; max-width: 80%;">
+            👋 Olá! Como posso te ajudar?<br><br>
+            <button onclick="responderOpcao('1')">1 - Ver Contas</button><br>
+            <button onclick="responderOpcao('2')">2 - Cheats CS2</button><br>
+            <button onclick="responderOpcao('3')">3 - Valorant Points</button><br>
+            <button onclick="responderOpcao('4')">4 - Suporte</button>
+          </div>
+        </div>`;
+    }
+  
+    function responderOpcao(opcao) {
+      const chatBody = document.getElementById('chatBody');
+  
+      if (estadoChat === 'aguardando_email') {
+        const email = opcao;
+        userMsg(email);
+        estadoChat = 'pagamento';
+        botMsg('💳 Selecione a forma de pagamento:<br><button onclick="responderOpcao(\'pix\')">PIX</button> <button onclick="responderOpcao(\'cartao\')">Cartão</button> <button onclick="responderOpcao(\'chave\')">Chave Promoção</button>');
+        return;
+      }
+  
+      if (estadoChat === 'pagamento') {
+        const formas = { 'pix': 'PIX', 'cartao': 'Cartão', 'chave': 'Chave Promoção' };
+        userMsg(`Forma de pagamento: ${formas[opcao] || 'Desconhecida'}`);
+        botMsg(`✅ Obrigado! Em breve enviaremos as instruções de pagamento via Discord para o e-mail informado. Produto: ${produtoSelecionado}`);
+        estadoChat = '';
+        return;
+      }
+  
+      switch (opcao) {
+        case '1':
+          userMsg('1 - Ver Contas');
+          estadoChat = 'escolhendo_conta';
+          botMsg(`🎮 Selecione uma conta:<br>
+          <button onclick="selecionarConta('Prime Básico')">Prime Básico</button><br>
+          <button onclick="selecionarConta('Prime + Lealdade')">Prime + Lealdade</button><br>
+          <button onclick="selecionarConta('Prime + Lealdade + 5 anos')">Prime + Lealdade + 5 anos</button><br>
+          <button onclick="selecionarConta('Prime + Lealdade + 5y + 10y')">Prime + Lealdade + 5y + 10y</button>`);
+          break;
+  
+        case '2':
+          userMsg('2 - Cheats CS2');
+          botMsg('🧠 Temos Memesense, SKEET e NeverLose. Qual deseja?');
+          break;
+  
+        case '3':
+          userMsg('3 - Valorant Points');
+          botMsg('🎯 Temos várias opções de VP. Quantos deseja comprar?');
+          break;
+  
+        case '4':
+          userMsg('4 - Suporte');
+          botMsg('👨‍💻 Acesse nosso Discord para atendimento: https://discord.gg/jb4xdM27');
+          break;
+  
+        default:
+          userMsg(opcao);
+          botMsg('❌ Opção inválida. Tente novamente.');
+      }
+    }
+  
+    function selecionarConta(nomeProduto) {
+      produtoSelecionado = nomeProduto;
+      userMsg(`Selecionado: ${nomeProduto}`);
+      botMsg('📧 Por favor, informe seu e-mail:');
+      estadoChat = 'aguardando_email';
+    }
+  
+    function userMsg(msg) {
+      const chatBody = document.getElementById('chatBody');
+      chatBody.innerHTML += `
+        <div style="margin-bottom: 10px; text-align: right;">
+          <div style="display: inline-block; background-color: #ff004f; padding: 10px; border-radius: 10px; color: white; max-width: 80%;">
+            ${msg}
+          </div>
+        </div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+  
+    function botMsg(msg) {
+      const chatBody = document.getElementById('chatBody');
+      chatBody.innerHTML += `
+        <div style="margin-bottom: 10px; text-align: left;">
+          <div style="display: inline-block; background-color: #333; padding: 10px; border-radius: 10px; color: white; max-width: 80%;">
+            ${msg}
+          </div>
+        </div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+  
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const msg = input.value.trim();
+      if (msg !== '') {
+        input.value = '';
+        responderOpcao(msg);
+      }
+    }
+  </script>
+  
